@@ -12,18 +12,21 @@ import java.util.Random;
 public class GamePanel extends JPanel {
 
     public double x=100,y=10;
-    private double xDir=0.01, yDir=0.01;
-    //private MouseInputs mouseInputs;
+    private double xDir=1, yDir=1;
+    private MouseInputs mouseInputs;
     private int frame = 0;
     private long lastCheck = 0;
     private Color color = new Color(100, 200, 100);
     private Random random;
 
     public GamePanel(){
-        //mouseInputs = new MouseInputs(this);
+
         addKeyListener(new KeyboardInputs(this));
-        //addMouseListener(mouseInputs);
-        //addMouseMotionListener(mouseInputs);
+
+        mouseInputs = new MouseInputs(this);
+        addMouseListener(mouseInputs);
+        addMouseMotionListener(mouseInputs);
+
         random = new Random();
     }
 
@@ -36,7 +39,7 @@ public class GamePanel extends JPanel {
         updateRectangle();
 
         g.fillRect((int)x, (int)y,50,50);
-        repaint();
+        //repaint();
         frame++;
         if(System.currentTimeMillis() - lastCheck > 1000) {
             lastCheck = System.currentTimeMillis();
